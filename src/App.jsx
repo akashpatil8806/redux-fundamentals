@@ -12,9 +12,9 @@ const App = () => {
 
       <h1>This is the ReduxToolkit</h1>
       {/* This is button for the clear all cart */}
-      <button onClick={() => dispatch(clearAllItem())} className="btn-clear">
+      {/* <button onClick={() => dispatch(clearAllItem())} className="btn-clear">
         clearAll Cart
-      </button>
+      </button> */}
       <Product />
     </div>
   );

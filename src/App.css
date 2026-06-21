@@ -73,3 +73,8 @@ body {
   border-radius: 6px;
   cursor: pointer;
 }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}

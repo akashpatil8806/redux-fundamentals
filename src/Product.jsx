@@ -1,9 +1,11 @@
 import AddCart from "./AddCart";
+import "./App.css";
 import "./Product.css";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem, removeItem } from "./redux/slice";
 import { useEffect } from "react";
 import { fecthProduct } from "./redux/productSlice";
+import { createSelector } from "@reduxjs/toolkit";
 
 const Product = () => {
   const dispatch = useDispatch();
@@ -12,33 +14,61 @@ const Product = () => {
     dispatch(fecthProduct());
   }, []);
 
-  const selector = useSelector((state) => state.products.items);
-  console.log(selector);
+  const Productselector = useSelector((state) => state.products.items);
+  console.log(Productselector);
+  const cartSelectore = useSelector((state) => state.cart.items);
+  console.log(cartSelectore);
   return (
-    <div className="product-card">
-      <img
-        src="https://m.media-amazon.com/images/I/91O+59RrgQL._AC_.jpg"
-        alt="Product"
-      />
+    <>
+      <div className="grid">
+        {Productselector.length &&
+          Productselector.map((item) => (
+            <div key={item.id} className="card">
+              <img src={item.thumbnail} alt={item.title} />
+              <div className="content">
+                <div className="title"> {item.title}</div>
+                <div className="brand">{item.brand}</div>
+                <div className="price">{item.price}</div>
+                <div className="rating">{item.rating}</div>
+                {/* {cartSelectore.find(
+                  ((cartItem) => cartItem.id === cartItem.id) ? (
+                    <button className="btn-clear btn-disable">
+                      Add Too Cart
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => dispatch(addItem(item))}
+                      className="btn-clear"
+                    >
+                      Add Cart
+                    </button>
+                  ),
+                )} */}
 
-      <div className="product-content">
-        <h2>Wireless Headphones</h2>
+                {cartSelectore.find((cartItem) => cartItem.id === item.id) ? (
+                  <button className="btn-clear btn-disable">
+                    Added To Cart
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => dispatch(addItem(item))}
+                    className="btn-clear"
+                  >
+                    Add Cart
+                  </button>
+                )}
+              </div>
 
-        <p className="description">
-          Premium sound quality with noise cancellation and long battery life.
-        </p>
-
-        <div className="price-section">
-          <span className="price">₹1,999</span>
-          <span className="old-price">₹2,999</span>
-        </div>
-
-        <button onClick={() => dispatch(addItem(1))}>Add to Cart</button>
-        <button onClick={() => dispatch(removeItem(1))} className="r-btn">
-          Remove to Cart
-        </button>
+              {/* <button
+                onClick={() => dispatch(addItem(item))}
+                className="btn-clear"
+              >
+                Add Cart
+              </button> */}
+            </div>
+          ))}
       </div>
-    </div>
+    </>
   );
 };
 
