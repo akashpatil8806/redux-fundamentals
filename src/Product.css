@@ -137,3 +137,10 @@ button:hover {
 .btn-clear.btn-disable:hover {
   background: #ccc;
 }
+.remove-button {
+  background-color: #d02c2c !important;
+}
+
+.remove-button:hover {
+  background-color: #f08989 !important;
+}

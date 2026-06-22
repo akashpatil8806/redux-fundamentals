@@ -46,8 +46,11 @@ const Product = () => {
                 )} */}
 
                 {cartSelectore.find((cartItem) => cartItem.id === item.id) ? (
-                  <button className="btn-clear btn-disable">
-                    Added To Cart
+                  <button
+                    onClick={() => dispatch(removeItem(item))}
+                    className="remove-button"
+                  >
+                    Remove to Cart
                   </button>
                 ) : (
                   <button
